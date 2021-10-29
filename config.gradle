@@ -1,0 +1,28 @@
+ext {
+    android = [
+            compileSdk   : 30,
+            minSdk       : 21,
+            targetSdk    : 29,
+            applicationId: "com.chen.app",
+            versionCode  : 1,
+            versionName  : "1.0",
+    ]
+
+    libDepends = [
+            "androidx_appcompat"       : 'androidx.appcompat:appcompat:1.3.1',
+            "androidx_constraintlayout": 'androidx.constraintlayout:constraintlayout:2.0.4',
+            "androidx_ktx"             : 'androidx.core:core-ktx:1.6.0',
+            "android_material"             : 'com.google.android.material:material:1.3.0',
+            "retrofit"                 : 'com.squareup.retrofit2:retrofit:2.9.0',
+            "rxjava"                   : 'io.reactivex.rxjava2:rxjava:2.2.19',
+            "rxandroid"                : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+            "arouterApi"                : 'com.alibaba:arouter-api:1.5.2',
+            "arouterCompiler"          : 'com.alibaba:arouter-compiler:1.5.2'
+    ]
+
+    testDepends = [
+            "junit"                 : 'junit:junit:4.13.2',
+            "androidx_test_junit"   : 'androidx.test.ext:junit:1.1.3',
+            "androidx_test_espresso": 'androidx.test.espresso:espresso-core:3.4.0',
+    ]
+}

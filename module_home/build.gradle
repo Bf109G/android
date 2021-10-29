@@ -1,0 +1,51 @@
+plugins {
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.android.library'
+}
+
+//if(isModule.toBoolean()){
+//    apply plugin: 'com.android.application'
+//}else{
+//    apply plugin: 'com.android.library'
+//}
+android {
+    compileSdk rootProject.ext.android.compileSdk
+
+    defaultConfig {
+        if(isModule.toBoolean()){
+            applicationId  rootProject.ext.android.applicationId.rightShift('home')
+        }
+        minSdk rootProject.ext.android.minSdk
+        targetSdk rootProject.ext.android.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        kapt {
+            arguments{
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.?ar'], dir: 'libs')
+    implementation project(':library_base')
+    kapt libDepends.arouterCompiler
+}
