@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -20,6 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    buildFeatures {
+        dataBinding = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -39,6 +46,16 @@ dependencies {
     api libDepends.androidx_appcompat
     api libDepends.androidx_ktx
     api libDepends.androidx_constraintlayout
-
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     api libDepends.arouterApi
+
+    api libDepends.retrofit2
+    api libDepends.converter_gson
+    api libDepends.adapter_rxjava2
+    api libDepends.rx_java2
+    api libDepends.rx_android2
+
+    api libDepends.mmkv
+
 }
