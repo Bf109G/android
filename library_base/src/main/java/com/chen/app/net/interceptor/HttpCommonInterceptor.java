@@ -4,8 +4,8 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.chen.app.base.BuildConfig;
-import com.chen.app.utils.KLog;
-import com.chen.app.utils.MMKVUtil;
+//import com.chen.app.utils.KLog;
+//import com.chen.app.utils.MMKVUtil;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -39,7 +39,7 @@ public class HttpCommonInterceptor implements Interceptor {
 //        addCookie()
         if(BuildConfig.DEBUG){
             ResponseBody responseBody = response.body();
-            KLog.INSTANCE.e(TAG, "网络请求--+" + response.request().url());
+//            KLog.INSTANCE.e(TAG, "网络请求--+" + response.request().url());
             if(responseBody != null){
                 BufferedSource source = responseBody.source();
                 Buffer buffer = source.getBuffer();
@@ -48,7 +48,7 @@ public class HttpCommonInterceptor implements Interceptor {
                         StandardCharsets.UTF_8;
                 Charset newCharSet = Util.bomAwareCharset(source, charset);
                 String str = buffer.clone().readString(newCharSet);
-                KLog.INSTANCE.json(TAG, str);
+//                KLog.INSTANCE.json(TAG, str);
             }
         }
         return response;
@@ -60,11 +60,11 @@ public class HttpCommonInterceptor implements Interceptor {
         builder.addHeader("channelId", "7");
         builder.addHeader("platform", "android");
 
-        String accessToken = MMKVUtil.getStringValue("accessToken");
-        if(!TextUtils.isEmpty(accessToken)){
-            builder.addHeader("accessToken", accessToken);
-        }
-        KLog.INSTANCE.w(TAG, "accessToken=" + accessToken);
+//        String accessToken = MMKVUtil.getStringValue("accessToken");
+//        if(!TextUtils.isEmpty(accessToken)){
+//            builder.addHeader("accessToken", accessToken);
+//        }
+//        KLog.INSTANCE.w(TAG, "accessToken=" + accessToken);
         return builder.build();
     }
 }

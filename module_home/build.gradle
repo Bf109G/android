@@ -1,14 +1,14 @@
 plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.android.library'
 }
 
-//if(isModule.toBoolean()){
-//    apply plugin: 'com.android.application'
-//}else{
-//    apply plugin: 'com.android.library'
-//}
+if(isModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+
 android {
     compileSdk rootProject.ext.android.compileSdk
 
@@ -46,6 +46,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
-    implementation project(':library_base')
+    api project(path: ':library_base')
     kapt libDepends.arouterCompiler
 }

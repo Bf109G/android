@@ -19,8 +19,8 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(),
     IBaseView {
 
-    private lateinit var mBinding: VB
-    private lateinit var mViewModel: VM
+    protected lateinit var mBinding: VB
+    protected lateinit var mViewModel: VM
 
     private var mViewModelId: Int = 0
 

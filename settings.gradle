@@ -10,4 +10,6 @@ rootProject.name = "ChenApplication"
 include ':app'
 include ':module_home'
 include ':library_base'
-
+include ':library_res'
+include ':library_widget'
+include ':library_util'

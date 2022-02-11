@@ -2,7 +2,7 @@ package com.chen.app.net.base;
 
 import android.accounts.NetworkErrorException;
 
-import com.chen.app.utils.KLog;
+//import com.chen.app.utils.KLog;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -81,7 +81,7 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
                     || baseResponse.getCode() == ACCOUNT_LOCKED
                     || baseResponse.getCode() == USERNAME_NOT_FOUND
                     || baseResponse.getCode() == ACCESS_DENIED_AUTHORITY_EXPIRED) {
-                KLog.INSTANCE.e("responseCode--异常");
+//                KLog.INSTANCE.e("responseCode--异常");
 //                Utils.toLogin(); // 无效token,跳转到登陆
             }
         }
@@ -89,7 +89,7 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
 
     @Override
     public void onError(@NonNull Throwable e) {
-        KLog.INSTANCE.e("进入--BaseObserver--Error");
+//        KLog.INSTANCE.e("进入--BaseObserver--Error");
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException

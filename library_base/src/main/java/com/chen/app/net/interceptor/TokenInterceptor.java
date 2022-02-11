@@ -1,6 +1,6 @@
 package com.chen.app.net.interceptor;
 
-import com.chen.app.utils.MMKVUtil;
+//import com.chen.app.utils.MMKVUtil;
 
 import java.io.IOException;
 
@@ -25,9 +25,9 @@ public class TokenInterceptor implements Interceptor {
         MediaType mediaType = responseBody.contentType();
         String content = responseBody.string();
 
-        if(!"".equals(MMKVUtil.getStringValue("refreshToken"))){
-
-        }
+//        if(!"".equals(MMKVUtil.getStringValue("refreshToken"))){
+//
+//        }
 
         return response.newBuilder()
                 .body(ResponseBody.create(mediaType, content))

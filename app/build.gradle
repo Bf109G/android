@@ -79,8 +79,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
-    implementation project(':library_base')
-    if(!isModule.toBoolean()){
+
+    if(isModule.toBoolean()){
+        println "-------++++base"
+        implementation(':library_base')
+    }else{
+        println "-------++++home"
         implementation project(':module_home')
     }
     kapt libDepends.arouterCompiler
