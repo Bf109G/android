@@ -9,6 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.alibaba.android.arouter.launcher.ARouter
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -29,8 +30,8 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initParams()
         initViewDataBinding(savedInstanceState)
+        initParams()
         initData()
         initViewObservable()
     }
@@ -50,6 +51,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
             mBinding.setVariable(mViewModelId, mViewModel)
             //让ViewModel拥有View的生命周期感应
             lifecycle.addObserver(mViewModel)
+            ARouter.getInstance().inject(this)
         }
     }
 

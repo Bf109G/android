@@ -12,7 +12,7 @@ import org.json.JSONObject
  * Description
  */
 object KLog {
-    private var IS_SHOW_LOG = false
+    private var IS_SHOW_LOG = true
     private const val DEFAULT_MESSAGE = "execute"
     private val LINE_SEPARATOR = System.getProperty("line.separator")
     private const val JSON_INDENT = 4

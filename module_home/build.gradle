@@ -3,19 +3,19 @@ plugins {
     id 'kotlin-kapt'
 }
 
-if(isModule.toBoolean()){
-    apply plugin: 'com.android.application'
-}else{
+//if(isModule.toBoolean()){
+//    apply plugin: 'com.android.application'
+//}else{
     apply plugin: 'com.android.library'
-}
+//}
 
 android {
     compileSdk rootProject.ext.android.compileSdk
 
     defaultConfig {
-        if(isModule.toBoolean()){
-            applicationId  rootProject.ext.android.applicationId.rightShift('home')
-        }
+//        if(isModule.toBoolean()){
+//            applicationId  rootProject.ext.android.applicationId.rightShift('home')
+//        }
         minSdk rootProject.ext.android.minSdk
         targetSdk rootProject.ext.android.targetSdk
 

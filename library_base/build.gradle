@@ -36,6 +36,12 @@ android {
     }
 }
 
+kapt {
+    arguments{
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
     api testDepends.junit
@@ -46,13 +52,15 @@ dependencies {
     api libDepends.androidx_appcompat
     api libDepends.androidx_ktx
     api libDepends.androidx_constraintlayout
-    api libDepends.arouterApi
 
     api libDepends.retrofit2
     api libDepends.converter_gson
     api libDepends.adapter_rxjava2
     api libDepends.rx_java2
     api libDepends.rx_android2
+
+    api libDepends.arouterApi
+    kapt libDepends.arouterCompiler
 
     api project(path: ':library_widget')
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'

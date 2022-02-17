@@ -3,8 +3,10 @@ package com.chen.app
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chen.app.base.BaseActivity
 import com.chen.app.databinding.ActivityMainBinding
+import com.chen.app.router.RouterFragmentPath
 import com.chen.app.view.ui.fragment.HomeFragment
 import com.chen.app.view.ui.fragment.MineFragment
 import com.chen.app.viewmodel.MainViewModel
@@ -67,16 +69,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         })
     }
 
-    private fun initFragment(){
-        val homeFrag = HomeFragment()
-        val mineFrag = MineFragment()
+    private fun initFragment() {
+        val homeFrag = ARouter.getInstance().build(RouterFragmentPath.HOME).navigation() as HomeFragment
+        val mineFrag = ARouter.getInstance().build(RouterFragmentPath.MINE).navigation() as MineFragment
         mFrags = ArrayList()
         mFrags?.add(homeFrag)
         mFrags?.add(mineFrag)
         commitAllowingStateLoss(0)
     }
 
-    private fun commitAllowingStateLoss(navIndex: Int){
+    private fun commitAllowingStateLoss(navIndex: Int) {
         mFrags?.let {
             val transaction = supportFragmentManager.beginTransaction()
             hideFrag()
@@ -91,7 +93,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    private fun hideFrag(){
+    private fun hideFrag() {
         mFrags?.let {
             val transaction = supportFragmentManager.beginTransaction()
             for (i in 0 until it.size) {

@@ -24,11 +24,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        kapt {
-            arguments{
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
+//        kapt {
+//            arguments{
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
 //        javaCompileOptions {
 //            annotationProcessorOptions {
 //                arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -77,15 +77,22 @@ android {
     }
 }
 
+kapt {
+    arguments{
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
 
-    if(isModule.toBoolean()){
-        println "-------++++base"
-        implementation(':library_base')
-    }else{
-        println "-------++++home"
-        implementation project(':module_home')
-    }
+//    if(isModule.toBoolean()){
+//        println "-------++++base"
+////        implementation(':library_base')
+//    }else{
+//        println "-------++++home"
+////        implementation project(':module_home')
+//    }
+    implementation project(':library_base')
     kapt libDepends.arouterCompiler
 }
