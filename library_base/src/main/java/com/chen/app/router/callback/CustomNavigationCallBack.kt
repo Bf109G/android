@@ -1,9 +1,11 @@
 package com.chen.app.router.callback
 
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.chen.app.utils.KLog
+import io.reactivex.Observable
 
 /**
  * Author by chennan
@@ -21,6 +23,7 @@ class CustomNavigationCallBack: NavigationCallback {
 
     override fun onArrival(postcard: Postcard) {
         KLog.d("CustomInterceptor", "onArrival=${postcard.path}")
+//        Toast.makeText(postcard.context, "去登录", Toast.LENGTH_LONG).show()
     }
 
     override fun onInterrupt(postcard: Postcard) {

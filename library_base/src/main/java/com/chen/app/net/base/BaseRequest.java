@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
  * Date on 2021/11/3
  * Description
  */
-public class BaseRequest<T> {
+public class BaseRequest {
     protected Retrofit retrofit;
 
     public BaseRequest(){
