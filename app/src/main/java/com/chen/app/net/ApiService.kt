@@ -2,8 +2,8 @@ package com.chen.app.net
 
 import com.chen.app.model.bean.MenuInfo
 import com.chen.app.net.base.BaseResponse
+import com.google.gson.JsonObject
 import io.reactivex.Observable
-import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -13,6 +13,9 @@ import retrofit2.http.POST
  * Description
  */
 interface ApiService {
-    @POST("homePage/v1/listBottomMenu")
+    @POST("homePage/v1/listBottomMenu1")
     fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>>
+
+    @POST("login/v1/loginByPassword")
+    fun signInByPwd(@Body jsonObject: JsonObject): Observable<BaseResponse<Object>>
 }

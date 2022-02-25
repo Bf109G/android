@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 
 //import com.chen.app.utils.KLog;
 
+import com.chen.app.utils.KLog;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -47,16 +49,17 @@ public class MetaDataUtil {
             ApplicationInfo appInfo = getApp().getPackageManager().getApplicationInfo(getApp().getPackageName(),
                     PackageManager.GET_META_DATA);
             int environment = appInfo.metaData.getInt("ENVIRONMENT");
+            KLog.INSTANCE.e("environment" + "environment=" + environment);
             if (environment == 0) {
-//                KLog.INSTANCE.e(TAG, "environment" + environment + "--dev环境");
+                KLog.INSTANCE.e(TAG, "environment" + environment + "--dev环境");
             } else if (environment == 1) {
-//                KLog.INSTANCE.e(TAG,"environment" + environment + "--qa环境");
+                KLog.INSTANCE.e(TAG,"environment" + environment + "--qa环境");
             } else if (environment == 2) {
-//                KLog.INSTANCE.e(TAG,"environment" + environment + "--release环境");
+                KLog.INSTANCE.e(TAG,"environment" + environment + "--release环境");
             }
             return environment;
         } catch (Exception e) {
-//            KLog.INSTANCE.e("environment" + 2 + "--release环境e");
+            KLog.INSTANCE.e("environment" + 2 + "--release环境" + e.getMessage());
             return 2;
         }
     }
@@ -76,13 +79,13 @@ public class MetaDataUtil {
         int environment = getEnvironment();
         switch (environment) {
             case 0:
-                baseUrl = "http://api.expoon1.com/";
+                baseUrl = "https://api.expoon1.com/";
                 break;
             case 1:
                 baseUrl = "http://api.expoon2.com/";
                 break;
             default:
-                baseUrl = "http://api.expoon.com/";
+                baseUrl = "https://renter-api.52mf.com/";
                 break;
         }
 //        KLog.INSTANCE.e(TAG,"baseUrl=" + baseUrl);

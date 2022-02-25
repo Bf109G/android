@@ -2,6 +2,7 @@ package com.chen.app.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.chen.app.utils.KLog
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
@@ -16,12 +17,12 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     private var mCompositeDisposable: CompositeDisposable? = null
 
-    private fun addDisposable(disposable: Disposable) {
+    protected fun addDisposable(disposable: Disposable) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }
-
         mCompositeDisposable?.add(disposable)
+        KLog.i("addDisposable", mCompositeDisposable?.size())
     }
 
     override fun onAny() {}
@@ -40,11 +41,12 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
     override fun onCleared() {
         super.onCleared()
-        mCompositeDisposable?.clear()
+        mCompositeDisposable?.dispose()
     }
 
     @Throws(Exception::class)
     override fun accept(disposable: Disposable?) {
+        KLog.i("disposable", disposable)
         disposable?.let {
             addDisposable(it)
         }

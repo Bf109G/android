@@ -13,13 +13,16 @@ import com.chen.app.model.bean.MenuInfo
 import com.chen.app.model.bean.UserInfo
 import com.chen.app.net.RetrofitRequest
 import com.chen.app.net.base.BaseResponse
+import com.chen.app.net.exception.ResponseException
 import com.chen.app.net.observer.DefaultObserver
 import com.chen.app.net.utils.RetrofitUtil
-import com.chen.app.net.utils.RxUtils
+import com.chen.app.net.utils.RxSchedulers
 import com.chen.app.router.RouterActivityPath
 import com.chen.app.router.callback.CustomNavigationCallBack
 import com.chen.app.utils.KLog
+import com.google.gson.JsonObject
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
 
 /**
  * Author by chennan
@@ -37,37 +40,56 @@ class HomeViewModel(application: Application): BaseViewModel(application) {
             R.id.button1 -> {
                 btnText.value = "jump"
 //                Toast.makeText(getApplication(), "jump", Toast.LENGTH_LONG).show()
-                ARouter.getInstance().build(RouterActivityPath.DETAIL)
-                    .withBoolean("flag", true)
-                    .withInt("total", 1)
-                    .withString("name", "detail")
-                    .withObject("userInfo", UserInfo("chennan",18))
-                    .navigation(getApplication(), CustomNavigationCallBack())
-
+//                ARouter.getInstance().build(RouterActivityPath.DETAIL)
+//                    .withBoolean("flag", true)
+//                    .withInt("total", 1)
+//                    .withString("name", "detail")
+//                    .withObject("userInfo", UserInfo("chennan",18))
+//                    .navigation(getApplication(), CustomNavigationCallBack())
+                this.signIn()
             }
         }
     }
 
+    var stateData: MutableLiveData<Any> = MutableLiveData()
+
     fun doPost(){
         val observable =  RetrofitRequest.instance.getBottomMenu()
-        observable.compose(RxUtils.mainTransformer())
-            .compose(RxUtils.exceptionTransformer())
+        observable
+            .compose(RxSchedulers.exceptionTransformer())
+            .compose(RxSchedulers.mainTransformer())
             .subscribe(object : DefaultObserver<List<MenuInfo>>() {
-                override fun onSubscribe(d: Disposable) {
-                    super.onSubscribe(d)
+                override fun onComplete(t: List<MenuInfo>) {
                 }
 
-                override fun onComplete() {
-                    super.onComplete()
+                override fun onError(e: ResponseException) {
                 }
 
-                override fun onNext(baseResponse: BaseResponse<List<MenuInfo>>) {
-                    super.onNext(baseResponse)
+                override fun onSubscribes(d: Disposable) {
                 }
 
-                override fun onError(throwable: Throwable) {
-                    super.onError(throwable)
+            })
+    }
+
+    private fun signIn(){
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("mobile", "17621148720")
+        jsonObject.addProperty("password","1234567")
+
+        val observable = RetrofitRequest.instance.signInByPwd(jsonObject)
+        observable.compose(RxSchedulers.mainTransformer())
+            .compose(RxSchedulers.exceptionTransformer())
+            .subscribe(object : DefaultObserver<Object>() {
+                override fun onComplete(t: Object) {
                 }
+
+                override fun onError(e: ResponseException) {
+                }
+
+                override fun onSubscribes(d: Disposable) {
+                    addDisposable(d)
+                }
+
             })
     }
 }

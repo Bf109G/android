@@ -55,6 +55,6 @@ public class BaseResponse<T> {
     }
 
     public boolean isOk() {
-        return code == 200;
+        return code == 1;
     }
 }

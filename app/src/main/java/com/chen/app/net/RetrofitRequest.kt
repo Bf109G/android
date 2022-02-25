@@ -5,6 +5,8 @@ import com.chen.app.net.base.BaseRequest
 import com.chen.app.net.base.BaseResponse
 import io.reactivex.Observable
 import android.annotation.SuppressLint
+import com.chen.app.model.bean.UserInfo
+import com.google.gson.JsonObject
 
 
 /**
@@ -25,4 +27,9 @@ class RetrofitRequest : BaseRequest() {
     fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>> {
         return service.getBottomMenu()
     }
+
+    fun signInByPwd(jsonObject: JsonObject): Observable<BaseResponse<Object>>{
+        return service.signInByPwd(jsonObject)
+    }
+
 }

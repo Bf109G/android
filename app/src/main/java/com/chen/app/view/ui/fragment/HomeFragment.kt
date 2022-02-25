@@ -29,7 +29,7 @@ class HomeFragment: BaseFragment<FragHomeBinding, HomeViewModel>() {
     }
 
     override fun initData() {
-
+        mViewModel.doPost()
     }
 
     override fun initViewObservable() {

@@ -2,7 +2,7 @@ package com.chen.app.net.utils;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -18,8 +18,8 @@ public class RetrofitUtil<T> {
         OkHttpClient okHttpClient = OkHttpUtil.getInstance().okHttpClient();
         retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(MetaDataUtil.getBaseUrl())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(MetaDataUtil.getBaseUrl() + "renter/")
                 .client(okHttpClient)
                 .build();
     }

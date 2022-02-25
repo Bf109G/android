@@ -7,17 +7,26 @@ import androidx.annotation.Nullable;
  * Date on 2022/2/19
  * Description
  */
-public class ResponseException extends  Exception{
+public class ResponseException extends Exception{
 
-    public int code;
+    private int code;
 
-    public String message;
+    private String message;
 
-    ResponseException(Throwable throwable, int code){
-        super(throwable);
+    public ResponseException(int code, String message){
+        this.code = code;
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
         this.code = code;
     }
 
+    @Nullable
     @Override
     public String getMessage() {
         return message;

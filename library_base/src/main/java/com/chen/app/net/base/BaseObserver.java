@@ -4,6 +4,8 @@ import android.accounts.NetworkErrorException;
 
 //import com.chen.app.utils.KLog;
 
+import com.chen.app.utils.KLog;
+
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
@@ -17,7 +19,7 @@ import io.reactivex.disposables.Disposable;
  * Date on 2021/11/2
  * Description
  */
-public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
+public abstract class BaseObserver<T> implements Observer<T> {
     private static final int RESPONSE_OK = 200;
     private final static int INVALID_TOKEN = 2000;//（invalid_token）- 不是正确的token  // 退出登录
     private final static int EXPIRED_TOKEN = 2007;//（expired_token）- token过期    // 刷新 token
@@ -64,32 +66,13 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
     }
 
     @Override
-    public void onNext(@NonNull BaseResponse<T> baseResponse) {
-        if(baseResponse.getCode() == RESPONSE_OK){
+    public void onNext(@NonNull T t) {
 
-        }else{
-            if (baseResponse.getCode() == INVALID_TOKEN
-                    || baseResponse.getCode() == UNAUTHORIZED
-                    || baseResponse.getCode() == SIGNATURE_DENIED
-                    || baseResponse.getCode() == BAD_CREDENTIALS
-                    || baseResponse.getCode() == UNAUTHORIZED_CLIENT
-                    || baseResponse.getCode() == INVALID_GRANT
-                    || baseResponse.getCode() == REDIRECT_URI_MISMATCH
-                    || baseResponse.getCode() == ACCOUNT_DISABLED
-                    || baseResponse.getCode() == ACCOUNT_EXPIRED
-                    || baseResponse.getCode() == CREDENTIALS_EXPIRED
-                    || baseResponse.getCode() == ACCOUNT_LOCKED
-                    || baseResponse.getCode() == USERNAME_NOT_FOUND
-                    || baseResponse.getCode() == ACCESS_DENIED_AUTHORITY_EXPIRED) {
-//                KLog.INSTANCE.e("responseCode--异常");
-//                Utils.toLogin(); // 无效token,跳转到登陆
-            }
-        }
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
-//        KLog.INSTANCE.e("进入--BaseObserver--Error");
+        KLog.INSTANCE.e("进入--BaseObserver--Error");
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException

@@ -19,8 +19,8 @@ import java.lang.reflect.ParameterizedType
  * Description
  */
 abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment(), IBaseView {
-    private lateinit var mBinding: VB
-    private lateinit var mViewModel: VM
+    protected lateinit var mBinding: VB
+    protected lateinit var mViewModel: VM
 
     private var mLasView: View? = null
     private var mViewModelId: Int = 0

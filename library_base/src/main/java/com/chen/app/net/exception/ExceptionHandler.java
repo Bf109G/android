@@ -2,6 +2,7 @@ package com.chen.app.net.exception;
 
 import android.net.ParseException;
 
+import com.chen.app.utils.KLog;
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
 
@@ -42,7 +43,7 @@ public class ExceptionHandler {
         /**
          * 网络错误
          */
-        static final int NETWORD_ERROR = 1002;
+        static final int INTERNET_ERROR = 1002;
         /**
          * 协议出错
          */
@@ -57,34 +58,39 @@ public class ExceptionHandler {
          * 连接超时
          */
         static final int TIMEOUT_ERROR = 1006;
+
+        /**
+         * API错误
+         */
+        static final int API_ERROR = 1007;
     }
 
     public static ResponseException handleException(Throwable e) {
         ResponseException ex;
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            ex = new ResponseException(e, ERROR.HTTP_ERROR);
+            ex = new ResponseException(ERROR.HTTP_ERROR, e.getMessage());
             switch (httpException.code()) {
                 case UNAUTHORIZED:
-                    ex.message = "操作未授权";
+                    ex.setMessage("操作未授权");
                     break;
                 case FORBIDDEN:
-                    ex.message = "请求被拒绝";
+                    ex.setMessage("请求被拒绝");
                     break;
                 case NOT_FOUND:
-                    ex.message = "资源不存在";
+                    ex.setMessage("资源不存在");
                     break;
                 case REQUEST_TIMEOUT:
-                    ex.message = "服务器执行超时";
+                    ex.setMessage("服务器执行超时");
                     break;
                 case INTERNAL_SERVER_ERROR:
-                    ex.message = "服务器内部错误";
+                    ex.setMessage("服务器内部错误");
                     break;
                 case SERVICE_UNAVAILABLE:
-                    ex.message = "服务器不可用";
+                    ex.setMessage("服务器不可用");
                     break;
                 default:
-                    ex.message = "网络错误";
+                    ex.setMessage("网络错误");
                     break;
             }
             return ex;
@@ -92,32 +98,31 @@ public class ExceptionHandler {
                 || e instanceof JSONException
                 || e instanceof ParseException
                 || e instanceof MalformedJsonException) {
-            ex = new ResponseException(e, ERROR.PARSE_ERROR);
-            ex.message = "解析错误";
+            ex = new ResponseException(ERROR.PARSE_ERROR, "解析错误");
             return ex;
         } else if (e instanceof ConnectException) {
-            ex = new ResponseException(e, ERROR.NETWORD_ERROR);
-            ex.message = "连接失败";
+            ex = new ResponseException(ERROR.INTERNET_ERROR, "连接失败");
             return ex;
         } else if (e instanceof javax.net.ssl.SSLException) {
-            ex = new ResponseException(e, ERROR.SSL_ERROR);
-            ex.message = "证书验证失败";
+            ex = new ResponseException(ERROR.SSL_ERROR, "证书验证失败");
             return ex;
         } else if (e instanceof ConnectTimeoutException) {
-            ex = new ResponseException(e, ERROR.TIMEOUT_ERROR);
-            ex.message = "连接超时";
+            ex = new ResponseException(ERROR.TIMEOUT_ERROR, "连接超时");
             return ex;
         } else if (e instanceof SocketTimeoutException) {
-            ex = new ResponseException(e, ERROR.TIMEOUT_ERROR);
-            ex.message = "连接超时";
+            ex = new ResponseException(ERROR.TIMEOUT_ERROR, "连接超时");
             return ex;
         } else if (e instanceof UnknownHostException) {
-            ex = new ResponseException(e, ERROR.TIMEOUT_ERROR);
-            ex.message = "主机地址未知";
+            ex = new ResponseException(ERROR.TIMEOUT_ERROR, "主机地址未知");
+            return ex;
+        } else if(e instanceof  SecurityException){
+            ex = new ResponseException(ERROR.INTERNET_ERROR,  e.getMessage());
+            return ex;
+        } else if(e instanceof ResponseException){
+            ex = new ResponseException(ERROR.API_ERROR,  e.getMessage());
             return ex;
         } else {
-            ex = new ResponseException(e, ERROR.UNKNOWN);
-            ex.message = "未知错误";
+            ex = new ResponseException(ERROR.UNKNOWN, "未知错误");
             return ex;
         }
     }

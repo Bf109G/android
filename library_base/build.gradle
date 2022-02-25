@@ -47,6 +47,7 @@ dependencies {
     api testDepends.junit
     api testDepends.androidx_test_junit
     api testDepends.androidx_test_espresso
+    debugApi libDepends.leakcanary
 
     api libDepends.android_material
     api libDepends.androidx_appcompat
@@ -63,5 +64,4 @@ dependencies {
     kapt libDepends.arouterCompiler
 
     api project(path: ':library_widget')
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
