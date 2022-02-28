@@ -35,7 +35,7 @@ import androidx.annotation.NonNull;
  *     desc  : utils about thread
  * </pre>
  */
-public final class ThreadUtil {
+public final class ThreadUtils {
 
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
 

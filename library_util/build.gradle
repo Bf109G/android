@@ -32,5 +32,7 @@ android {
 dependencies {
     api 'com.google.code.gson:gson:2.8.9'
     api libDepends.mmkv
-    implementation 'androidx.annotation:annotation:1.2.0'
+    api libDepends.androidx_appcompat
+    api libDepends.android_material
+    api project(path: ':library_res')
 }

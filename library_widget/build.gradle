@@ -30,8 +30,5 @@ android {
 }
 
 dependencies {
-    api libDepends.androidx_appcompat
-    api libDepends.android_material
-    api project(path: ':library_res')
     api project(path: ':library_util')
 }
