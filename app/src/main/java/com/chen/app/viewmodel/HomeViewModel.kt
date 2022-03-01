@@ -40,13 +40,13 @@ class HomeViewModel(application: Application): BaseViewModel(application) {
             R.id.button1 -> {
                 btnText.value = "jump"
 //                Toast.makeText(getApplication(), "jump", Toast.LENGTH_LONG).show()
-//                ARouter.getInstance().build(RouterActivityPath.DETAIL)
-//                    .withBoolean("flag", true)
-//                    .withInt("total", 1)
-//                    .withString("name", "detail")
-//                    .withObject("userInfo", UserInfo("chennan",18))
-//                    .navigation(getApplication(), CustomNavigationCallBack())
-                this.signIn()
+                ARouter.getInstance().build(RouterActivityPath.DETAIL)
+                    .withBoolean("flag", true)
+                    .withInt("total", 1)
+                    .withString("name", "detail")
+                    .withObject("userInfo", UserInfo("chennan",18))
+                    .navigation(getApplication(), CustomNavigationCallBack())
+//                this.signIn()
             }
         }
     }

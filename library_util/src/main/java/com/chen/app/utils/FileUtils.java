@@ -32,7 +32,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Date on 2022/2/28
  * Description
  */
-public class FileUtils {
+public final class FileUtils {
     private static final String LINE_SEP = System.getProperty("line.separator");
 
     private FileUtils() {

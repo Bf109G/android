@@ -1,22 +1,20 @@
 package com.chen.app.net.observer;
 
+import android.graphics.Color;
+import android.view.Gravity;
 import android.widget.Toast;
 
+import com.chen.app.base.R;
 import com.chen.app.net.base.BaseObserver;
-import com.chen.app.net.base.BaseResponse;
-import com.chen.app.net.exception.ExceptionHandler;
 import com.chen.app.net.exception.ResponseException;
+import com.chen.app.utils.AppUtils;
+import com.chen.app.utils.ColorUtils;
 import com.chen.app.utils.KLog;
+import com.chen.app.utils.ToastUtils;
 import com.chen.app.utils.gson.GsonUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 
 import androidx.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
-import okhttp3.ResponseBody;
-import retrofit2.HttpException;
 
 /**
  * Author by chennan
@@ -51,7 +49,14 @@ public abstract class DefaultObserver<T> extends BaseObserver<T> {
             KLog.INSTANCE.e("toastError", throwable.getMessage());
             KLog.INSTANCE.e("toastError", ((ResponseException) throwable).getCode());
             onError(((ResponseException) throwable));
+
+            ToastUtils.showShort("code=" +((ResponseException) throwable).getCode() + "message=" + throwable.getMessage());
+//            ToastUtils.make().setTextColor(Color.GREEN).setDurationIsLong(true).show("");
+//            ToastUtils.make().setTextColor(Color.WHITE).setBgColor(ColorUtils.getColor(R.color.color_353535)).show("");
+//            ToastUtils.make().setGravity(Gravity.CENTER,0,0).show("");
+//            ToastUtils.make().setMode(ToastUtils.MODE.DARK).show("");
         }
+
 
 //        try {
 //            KLog.INSTANCE.e("toastError", throwable.getMessage());

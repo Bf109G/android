@@ -1,7 +1,6 @@
 package com.chen.app
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chen.app.base.BaseActivity

@@ -7,7 +7,7 @@ import android.content.res.Resources;
  * Date on 2022/2/28
  * Description
  */
-public class AndroidBarUtils {
+public final class AndroidBarUtils {
 
     public static int getStatusBarHeight() {
         Resources resources = AppUtils.getApp().getResources();

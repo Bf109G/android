@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.chen.app.utils.KLog
+import com.chen.app.utils.ToastUtils
 import io.reactivex.Observable
 
 /**
@@ -28,6 +29,6 @@ class CustomNavigationCallBack: NavigationCallback {
 
     override fun onInterrupt(postcard: Postcard) {
         KLog.d("CustomInterceptor", "onInterrupt=${postcard.path}")
-        Toast.makeText(postcard.context, "去登录", Toast.LENGTH_LONG).show()
+        ToastUtils.showLong("去登录")
     }
 }

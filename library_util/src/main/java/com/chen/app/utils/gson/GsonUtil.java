@@ -16,7 +16,7 @@ import java.util.Map;
  * Date on 2021/11/3
  * Description
  */
-public class GsonUtil {
+public final class GsonUtil {
     private static Gson gson = null;
 
     static {

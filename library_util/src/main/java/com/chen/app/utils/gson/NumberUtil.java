@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * Date on 2021/11/3
  * Description
  */
-public class NumberUtil {
+public final class NumberUtil {
     public static boolean isIntOrLong(String str){
         return TextUtils.isDigitsOnly(str);
     }

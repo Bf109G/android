@@ -5,13 +5,16 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.view.View;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.StringRes;
 
 
@@ -20,7 +23,7 @@ import androidx.annotation.StringRes;
  * Date on 2022/2/28
  * Description
  */
-public class UtilsBridge {
+public final class UtilsBridge {
 
     //start
     static void register(Application application) {
@@ -78,6 +81,10 @@ public class UtilsBridge {
     static boolean isActivityAlive(final Activity activity) {
         return ActivityUtils.isActivityAlive(activity);
     }
+
+    static void finishAllActivities() {
+        ActivityUtils.finishAllActivities();
+    }
     // ActivityUtils end
 
     // AndroidBarUtils start
@@ -89,6 +96,16 @@ public class UtilsBridge {
         return AndroidBarUtils.getNavBarHeight();
     }
     // AndroidBarUtil end
+
+    // ConvertUtils start
+    static String byte2FitMemorySize(final long byteSize) {
+        return ConvertUtils.byte2FitMemorySize(byteSize);
+    }
+
+    static byte[] inputStream2Bytes(final InputStream is) {
+        return ConvertUtils.inputStream2Bytes(is);
+    }
+    // ConvertUtils end
 
     // FileUtils start
     static boolean isFileExists(final File file) {
@@ -127,6 +144,26 @@ public class UtilsBridge {
         FileUtils.notifySystemToScan(file);
     }
     // FileUtils end
+
+    // FileIOUtils start
+    static boolean writeFileFromBytes(final File file,
+                                      final byte[] bytes) {
+        return FileIOUtils.writeFileFromBytesByChannel(file, bytes, true);
+    }
+
+    static byte[] readFile2Bytes(final File file) {
+        return FileIOUtils.readFile2BytesByChannel(file);
+    }
+
+    static boolean writeFileFromString(final String filePath, final String content, final boolean append) {
+        return FileIOUtils.writeFileFromString(filePath, content, append);
+    }
+
+    static boolean writeFileFromIS(final String filePath, final InputStream is) {
+        return FileIOUtils.writeFileFromIS(filePath, is);
+    }
+
+    // FileIOUtils end
 
     // ImageUtils start
     static byte[] bitmap2Bytes(final Bitmap bitmap) {
@@ -171,6 +208,13 @@ public class UtilsBridge {
         KeyboardUtils.fixSoftInputLeaks(activity);
     }
     // KeyboardUtils end
+
+    // PermissionUtils start
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    static boolean isGrantedDrawOverlays() {
+        return PermissionUtils.isGrantedDrawOverlays();
+    }
+    // PermissionUtils end
 
     // ScreenUtils start
     static int getScreenWidth() {
@@ -219,6 +263,22 @@ public class UtilsBridge {
         return StringUtils.bytes2HexString(bytes);
     }
     // StringUtils end
+
+    // ToastUtils start
+    static void toastShowShort(final CharSequence text) {
+        ToastUtils.showShort(text);
+    }
+
+    static void toastCancel() {
+        ToastUtils.cancel();
+    }
+
+    private static void preLoad(final Runnable... runs) {
+        for (final Runnable r : runs) {
+            ThreadUtils.getCachedPool().execute(r);
+        }
+    }
+    // ToastUtils end
 
     // ThreadUtils start
     static void runOnUiThread(final Runnable runnable) {

@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
  * Date on 2022/2/28
  * Description
  */
-public class ScreenUtils {
+public final class ScreenUtils {
 
     public static int getAppScreenWidth() {
         WindowManager wm = (WindowManager) AppUtils.getApp().getSystemService(Context.WINDOW_SERVICE);

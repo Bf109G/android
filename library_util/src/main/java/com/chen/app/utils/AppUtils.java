@@ -39,6 +39,11 @@ public final class AppUtils {
         return mApplication;
     }
 
+    public static void exitApp() {
+        UtilsBridge.finishAllActivities();
+        System.exit(0);
+    }
+
     public static class ActivityLifecycleCallbacks {
 
         public void onActivityCreated(@NonNull Activity activity) {/**/}

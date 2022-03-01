@@ -15,7 +15,7 @@ import androidx.annotation.LayoutRes;
  * Date on 2022/2/28
  * Description
  */
-public class ViewUtils {
+public final class ViewUtils {
     public static View layoutId2View(@LayoutRes int layoutId) {
         LayoutInflater inflater = (LayoutInflater) AppUtils.getApp().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflater.inflate(layoutId, null);

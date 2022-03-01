@@ -117,6 +117,18 @@ public final class ActivityUtils {
     }
 
     /**
+     * Return whether the activity is alive.
+     *
+     * @param activity The activity.
+     * @return {@code true}: yes<br>{@code false}: no
+     */
+    public static boolean isActivityAlive(final Activity activity) {
+        return activity != null && !activity.isFinishing()
+                && (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 || !activity.isDestroyed());
+    }
+
+
+    /**
      * Return whether the activity exists.
      *
      * @param pkg The name of the package.
@@ -178,4 +190,25 @@ public final class ActivityUtils {
 //        }
 //    }
 
+    /**
+     * Finish all of activities.
+     */
+    public static void finishAllActivities() {
+        finishAllActivities(false);
+    }
+
+    /**
+     * Finish all of activities.
+     *
+     * @param isLoadAnim True to use animation for the outgoing activity, false otherwise.
+     */
+    public static void finishAllActivities(final boolean isLoadAnim) {
+        List<Activity> activityList = UtilsBridge.getActivityList();
+        for (Activity act : activityList) {
+            act.finish();
+            if (!isLoadAnim) {
+                act.overridePendingTransition(0, 0);
+            }
+        }
+    }
 }
