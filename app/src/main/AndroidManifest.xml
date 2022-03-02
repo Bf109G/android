@@ -35,6 +35,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivity2"
             android:screenOrientation="portrait"/>
+        <activity android:name=".oom.OOMActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -7,4 +7,6 @@ package com.chen.app.router
  */
 object RouterActivityPath {
     const val DETAIL = "/detail/detailActivity"
+
+    const val OOM = "/oom/OOMActivity"
 }

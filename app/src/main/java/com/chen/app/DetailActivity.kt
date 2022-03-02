@@ -1,16 +1,18 @@
 package com.chen.app
 
+import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.chen.app.base.BaseActivity
 import com.chen.app.base.BaseViewModel
 import com.chen.app.databinding.ActivityDetailBinding
 import com.chen.app.model.bean.UserInfo
 import com.chen.app.router.RouterActivityPath
 import com.chen.app.utils.KLog
-import com.chen.app.utils.gson.GsonUtil
-import util.LoginManager
 
 /**
  * Author by chennan
@@ -35,10 +37,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
     @JvmField
     var userInfo: UserInfo? = null
 
-    companion object{
-        var mInnerClass: InnerClass?  = null
-    }
-
     override val mLayout: Int
         get() = R.layout.activity_detail
 
@@ -51,14 +49,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
         KLog.i("initParams", "total=${total}")
         KLog.i("initParams", "name=${name}")
         KLog.i("initParams", "userInfo=${userInfo}")
-
-        LoginManager.getInstance(this).get()
     }
 
     override fun initData() {
-        if(mInnerClass == null){
-            mInnerClass = InnerClass()
-        }
+
     }
 
     override fun initViewObservable() {
@@ -68,8 +62,5 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
     override fun onReload() {
 
     }
-
-    class InnerClass(){
-
-    }
 }
+

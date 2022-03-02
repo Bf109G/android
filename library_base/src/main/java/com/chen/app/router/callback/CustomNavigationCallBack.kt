@@ -1,12 +1,9 @@
 package com.chen.app.router.callback
 
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.chen.app.utils.KLog
 import com.chen.app.utils.ToastUtils
-import io.reactivex.Observable
 
 /**
  * Author by chennan

@@ -29,14 +29,14 @@ import io.reactivex.functions.Consumer
  * Date on 2022/2/14
  * Description
  */
-class HomeViewModel(application: Application): BaseViewModel(application) {
+class HomeViewModel(application: Application) : BaseViewModel(application) {
 
     var btnText = SingleLiveEvent<String>()
 
-    fun onClick(v: View){
+    fun onClick(v: View) {
 //        KLog.i("HomeViewModel", btnText.value)
 //        KLog.i("HomeViewModel", v.id)
-        when(v.id){
+        when (v.id) {
             R.id.button1 -> {
                 btnText.value = "jump"
 //                Toast.makeText(getApplication(), "jump", Toast.LENGTH_LONG).show()
@@ -44,17 +44,21 @@ class HomeViewModel(application: Application): BaseViewModel(application) {
                     .withBoolean("flag", true)
                     .withInt("total", 1)
                     .withString("name", "detail")
-                    .withObject("userInfo", UserInfo("chennan",18))
+                    .withObject("userInfo", UserInfo("chennan", 18))
                     .navigation(getApplication(), CustomNavigationCallBack())
 //                this.signIn()
+            }
+            R.id.btnOOM -> {
+                ARouter.getInstance().build(RouterActivityPath.OOM)
+                    .navigation(getApplication(), CustomNavigationCallBack())
             }
         }
     }
 
     var stateData: MutableLiveData<Any> = MutableLiveData()
 
-    fun doPost(){
-        val observable =  RetrofitRequest.instance.getBottomMenu()
+    fun doPost() {
+        val observable = RetrofitRequest.instance.getBottomMenu()
         observable
             .compose(RxSchedulers.exceptionTransformer())
             .compose(RxSchedulers.mainTransformer())
@@ -71,10 +75,10 @@ class HomeViewModel(application: Application): BaseViewModel(application) {
             })
     }
 
-    private fun signIn(){
+    private fun signIn() {
         val jsonObject = JsonObject()
         jsonObject.addProperty("mobile", "17621148720")
-        jsonObject.addProperty("password","1234567")
+        jsonObject.addProperty("password", "1234567")
 
         val observable = RetrofitRequest.instance.signInByPwd(jsonObject)
         observable.compose(RxSchedulers.mainTransformer())
