@@ -44,10 +44,9 @@ kapt {
 
 dependencies {
     implementation fileTree(include: ['*.?ar'], dir: 'libs')
-    api testDepends.junit
-    api testDepends.androidx_test_junit
-    api testDepends.androidx_test_espresso
-    debugApi libDepends.leakcanary
+    testApi testDepends.junit
+    androidTestApi testDepends.androidx_test_junit
+    androidTestApi testDepends.androidx_test_espresso
 
     api libDepends.android_material
     api libDepends.androidx_appcompat
@@ -63,5 +62,6 @@ dependencies {
     api libDepends.arouterApi
     kapt libDepends.arouterCompiler
 
+    debugApi libDepends.leakcanary
     api project(path: ':library_widget')
 }
