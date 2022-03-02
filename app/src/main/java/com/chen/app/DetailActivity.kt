@@ -10,6 +10,7 @@ import com.chen.app.model.bean.UserInfo
 import com.chen.app.router.RouterActivityPath
 import com.chen.app.utils.KLog
 import com.chen.app.utils.gson.GsonUtil
+import util.LoginManager
 
 /**
  * Author by chennan
@@ -34,6 +35,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
     @JvmField
     var userInfo: UserInfo? = null
 
+    companion object{
+        var mInnerClass: InnerClass?  = null
+    }
+
     override val mLayout: Int
         get() = R.layout.activity_detail
 
@@ -46,10 +51,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
         KLog.i("initParams", "total=${total}")
         KLog.i("initParams", "name=${name}")
         KLog.i("initParams", "userInfo=${userInfo}")
+
+        LoginManager.getInstance(this).get()
     }
 
     override fun initData() {
-
+        if(mInnerClass == null){
+            mInnerClass = InnerClass()
+        }
     }
 
     override fun initViewObservable() {
@@ -57,6 +66,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, BaseViewModel>() {
     }
 
     override fun onReload() {
+
+    }
+
+    class InnerClass(){
 
     }
 }
