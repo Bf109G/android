@@ -24,7 +24,7 @@ class CustomInterceptor: IInterceptor {
     override fun process(postcard: Postcard, callback: InterceptorCallback) {
        KLog.d("CustomInterceptor", postcard.path)
         if(postcard.path == RouterActivityPath.DETAIL){
-            val token = ""
+            val token = "123"
             if(token.isEmpty()){
                 callback.onInterrupt(RuntimeException("还没有登录，去登录"))
             }else{

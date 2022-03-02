@@ -79,8 +79,8 @@ class HomeViewModel(application: Application): BaseViewModel(application) {
         val observable = RetrofitRequest.instance.signInByPwd(jsonObject)
         observable.compose(RxSchedulers.mainTransformer())
             .compose(RxSchedulers.exceptionTransformer())
-            .subscribe(object : DefaultObserver<Object>() {
-                override fun onComplete(t: Object) {
+            .subscribe(object : DefaultObserver<Any>() {
+                override fun onComplete(t: Any) {
                 }
 
                 override fun onError(e: ResponseException) {

@@ -28,7 +28,7 @@ class RetrofitRequest : BaseRequest() {
         return service.getBottomMenu()
     }
 
-    fun signInByPwd(jsonObject: JsonObject): Observable<BaseResponse<Object>>{
+    fun signInByPwd(jsonObject: JsonObject): Observable<BaseResponse<Any>>{
         return service.signInByPwd(jsonObject)
     }
 
