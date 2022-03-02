@@ -1,9 +1,7 @@
 package com.chen.app.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chen.app.R
@@ -12,17 +10,13 @@ import com.chen.app.bus.event.SingleLiveEvent
 import com.chen.app.model.bean.MenuInfo
 import com.chen.app.model.bean.UserInfo
 import com.chen.app.net.RetrofitRequest
-import com.chen.app.net.base.BaseResponse
 import com.chen.app.net.exception.ResponseException
 import com.chen.app.net.observer.DefaultObserver
-import com.chen.app.net.utils.RetrofitUtil
 import com.chen.app.net.utils.RxSchedulers
 import com.chen.app.router.RouterActivityPath
 import com.chen.app.router.callback.CustomNavigationCallBack
-import com.chen.app.utils.KLog
 import com.google.gson.JsonObject
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 
 /**
  * Author by chennan
@@ -39,14 +33,13 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         when (v.id) {
             R.id.button1 -> {
                 btnText.value = "jump"
-//                Toast.makeText(getApplication(), "jump", Toast.LENGTH_LONG).show()
-                ARouter.getInstance().build(RouterActivityPath.DETAIL)
-                    .withBoolean("flag", true)
-                    .withInt("total", 1)
-                    .withString("name", "detail")
-                    .withObject("userInfo", UserInfo("chennan", 18))
-                    .navigation(getApplication(), CustomNavigationCallBack())
-//                this.signIn()
+//                ARouter.getInstance().build(RouterActivityPath.DETAIL)
+//                    .withBoolean("flag", true)
+//                    .withInt("total", 1)
+//                    .withString("name", "detail")
+//                    .withObject("userInfo", UserInfo("chennan", 18))
+//                    .navigation(getApplication(), CustomNavigationCallBack())
+                this.signIn()
             }
             R.id.btnOOM -> {
                 ARouter.getInstance().build(RouterActivityPath.OOM)
@@ -60,8 +53,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     fun doPost() {
         val observable = RetrofitRequest.instance.getBottomMenu()
         observable
-            .compose(RxSchedulers.exceptionTransformer())
-            .compose(RxSchedulers.mainTransformer())
+            .compose(RxSchedulers.mainSchedulerErrorNext())
             .subscribe(object : DefaultObserver<List<MenuInfo>>() {
                 override fun onComplete(t: List<MenuInfo>) {
                 }
@@ -70,6 +62,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 }
 
                 override fun onSubscribes(d: Disposable) {
+                    addDisposable(d)
                 }
 
             })
@@ -78,11 +71,10 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     private fun signIn() {
         val jsonObject = JsonObject()
         jsonObject.addProperty("mobile", "17621148720")
-        jsonObject.addProperty("password", "1234567")
+        jsonObject.addProperty("password", "123456")
 
         val observable = RetrofitRequest.instance.signInByPwd(jsonObject)
-        observable.compose(RxSchedulers.mainTransformer())
-            .compose(RxSchedulers.exceptionTransformer())
+        observable.compose(RxSchedulers.mainSchedulerErrorNext())
             .subscribe(object : DefaultObserver<Any>() {
                 override fun onComplete(t: Any) {
                 }

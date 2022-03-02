@@ -24,11 +24,15 @@ class RetrofitRequest : BaseRequest() {
 
     private var service: ApiService = retrofit.create(ApiService::class.java)
 
-    fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>> {
+//    fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>> {
+//        return service.getBottomMenu()
+//    }
+
+    fun getBottomMenu(): Observable<List<MenuInfo>> {
         return service.getBottomMenu()
     }
 
-    fun signInByPwd(jsonObject: JsonObject): Observable<BaseResponse<Any>>{
+    fun signInByPwd(jsonObject: JsonObject): Observable<Any>{
         return service.signInByPwd(jsonObject)
     }
 

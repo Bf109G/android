@@ -1,5 +1,7 @@
 package com.chen.app.net.exception;
 
+import java.io.IOException;
+
 import androidx.annotation.Nullable;
 
 /**
@@ -7,7 +9,7 @@ import androidx.annotation.Nullable;
  * Date on 2022/2/19
  * Description
  */
-public class ResponseException extends Exception{
+public class ResponseException extends IOException {
 
     private int code;
 

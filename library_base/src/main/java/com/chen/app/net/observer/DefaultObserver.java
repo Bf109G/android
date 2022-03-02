@@ -29,17 +29,17 @@ public abstract class DefaultObserver<T> extends BaseObserver<T> {
     @Override
     public void onNext(@NonNull T t) {
         super.onNext(t);
-        KLog.INSTANCE.i(GsonUtil.bean2String(t));
+        KLog.i(GsonUtil.bean2String(t));
         onComplete(t);
     }
 
     @Override
     public void onError(@NonNull Throwable throwable) {
-        KLog.INSTANCE.e("进入--DefaultObserver--onError:" + throwable);
+        KLog.e("进入--DefaultObserver--onError:" + throwable);
         super.onError(throwable);
 
         if (throwable instanceof ResponseException) {
-            KLog.INSTANCE.e(((ResponseException) throwable).getCode() + throwable.getMessage());
+            KLog.e(((ResponseException) throwable).getCode() + throwable.getMessage());
             onError(((ResponseException) throwable));
             UtilsBridge.toastShowShort("code=" + ((ResponseException) throwable).getCode() + "message=" + throwable.getMessage());
         }

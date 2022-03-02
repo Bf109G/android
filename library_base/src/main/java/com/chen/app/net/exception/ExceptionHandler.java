@@ -119,7 +119,7 @@ public class ExceptionHandler {
             ex = new ResponseException(ERROR.INTERNET_ERROR,  e.getMessage());
             return ex;
         } else if(e instanceof ResponseException){
-            ex = new ResponseException(ERROR.API_ERROR,  e.getMessage());
+            ex = new ResponseException(((ResponseException) e).getCode(),  e.getMessage());
             return ex;
         } else {
             ex = new ResponseException(ERROR.UNKNOWN, "未知错误");

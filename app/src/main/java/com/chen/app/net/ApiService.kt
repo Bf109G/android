@@ -13,9 +13,12 @@ import retrofit2.http.POST
  * Description
  */
 interface ApiService {
+//    @POST("homePage/v1/listBottomMenu")
+//    fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>>
+
     @POST("homePage/v1/listBottomMenu")
-    fun getBottomMenu(): Observable<BaseResponse<List<MenuInfo>>>
+    fun getBottomMenu(): Observable<List<MenuInfo>>
 
     @POST("login/v1/loginByPassword")
-    fun signInByPwd(@Body jsonObject: JsonObject): Observable<BaseResponse<Any>>
+    fun signInByPwd(@Body jsonObject: JsonObject): Observable<Any>
 }

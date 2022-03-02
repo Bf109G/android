@@ -17,12 +17,24 @@ import io.reactivex.schedulers.Schedulers;
  * Description
  */
 public class RxSchedulers {
-    public static <T> ObservableTransformer<T, T> mainTransformer() {
-        return upstream -> upstream.subscribeOn(Schedulers.io())
+
+
+
+    public static <T> ObservableTransformer<T, T> mainSchedulerErrorNext() {
+        return upstream -> upstream
+                .onErrorResumeNext(new ErrorResumeFunction<>())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+
     }
 
-    public static <T> ObservableTransformer<T, T> ioTransformer() {
+    public static <T> ObservableTransformer<T, T> mainScheduler() {
+        return upstream -> upstream.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+    public static <T> ObservableTransformer<T, T> ioScheduler() {
         return upstream -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io());
     }
