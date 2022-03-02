@@ -28,82 +28,102 @@ object KLog {
         IS_SHOW_LOG = isShowLog
     }
 
+    @JvmStatic
     fun v() {
         printLog(V, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun v(msg: Any?) {
         printLog(V, null, msg)
     }
 
+    @JvmStatic
     fun v(tag: String?, msg: String?) {
         printLog(V, tag, msg)
     }
 
+    @JvmStatic
     fun d() {
         printLog(D, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun d(msg: Any?) {
         printLog(D, null, msg)
     }
 
+    @JvmStatic
     fun d(tag: String?, msg: Any?) {
         printLog(D, tag, msg)
     }
 
+    @JvmStatic
     fun i() {
         printLog(I, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun i(msg: Any?) {
         printLog(I, null, msg)
     }
 
+    @JvmStatic
     fun i(tag: String?, msg: Any?) {
         printLog(I, tag, msg)
     }
 
+    @JvmStatic
     fun w() {
         printLog(W, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun w(msg: Any?) {
         printLog(W, null, msg)
     }
 
+    @JvmStatic
     fun w(tag: String?, msg: Any?) {
         printLog(W, tag, msg)
     }
 
+    @JvmStatic
     fun e() {
         printLog(E, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun e(msg: Any?) {
         printLog(E, null, msg)
     }
 
+    @JvmStatic
     fun e(tag: String?, msg: Any?) {
         printLog(E, tag, msg)
     }
 
+    @JvmStatic
     fun a() {
         printLog(A, null, DEFAULT_MESSAGE)
     }
 
+    @JvmStatic
     fun a(msg: Any?) {
         printLog(A, null, msg)
     }
 
+    @JvmStatic
     fun a(tag: String?, msg: Any?) {
         printLog(A, tag, msg)
     }
 
+    @JvmStatic
     fun json(jsonFormat: String?) {
         printLog(JSON, null, jsonFormat)
     }
 
+    @JvmStatic
     fun json(tag: String?, jsonFormat: String?) {
         printLog(JSON, tag, jsonFormat)
     }

@@ -2,8 +2,6 @@ package com.chen.app.net.base;
 
 import android.accounts.NetworkErrorException;
 
-//import com.chen.app.utils.KLog;
-
 import com.chen.app.utils.KLog;
 
 import java.net.ConnectException;
@@ -72,7 +70,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(@NonNull Throwable e) {
-        KLog.INSTANCE.e("进入--BaseObserver--Error");
+        KLog.e("进入--BaseObserver--Error");
         try {
             if (e instanceof ConnectException
                     || e instanceof TimeoutException
