@@ -265,7 +265,7 @@ public final class UtilsBridge {
     // StringUtils end
 
     // ToastUtils start
-    static void toastShowShort(final CharSequence text) {
+    public static void toastShowShort(final CharSequence text) {
         ToastUtils.showShort(text);
     }
 
